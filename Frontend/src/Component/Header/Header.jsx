@@ -1,23 +1,25 @@
-import React, { useState } from 'react'
-import "./Header.css"
-import { Link, useNavigate } from 'react-router-dom'
-import { IoMenu, IoCloseOutline, IoNotificationsOutline} from "react-icons/io5"
-import HeaderSideNav from './HeaderSideNav'
-
+import React, { useState } from "react";
+import "./Header.css";
+import { Link, useNavigate } from "react-router-dom";
+import {
+  IoMenu,
+  IoCloseOutline,
+  IoNotificationsOutline,
+} from "react-icons/io5";
+import HeaderSideNav from "./HeaderSideNav";
 
 const items = [
   { title: "Rooms", url: "/room" },
-  { title: "Students", url: "/studentdash" }
-]
-
+  { title: "Student", url: "/studentdash" },
+];
 
 const Header = () => {
   const navigate = useNavigate();
   const [navToggle, setNavToggle] = useState(false);
 
   const logoutUser = () => {
-    navigate("/login")
-  }
+    navigate("/login");
+  };
 
   return (
     <>
@@ -26,17 +28,22 @@ const Header = () => {
           <HeaderSideNav items={items} setNavToggle={setNavToggle} />
         </div>
       )}
+
       <header>
-        <nav className='navigation --flex-between'>
-          <div className='logo'>
+        <nav className="navigation --flex-between">
+          <div className="logo">
             {navToggle ? (
-              <IoCloseOutline className='sidebar-toggle-icon' onClick={() => setNavToggle(false)} />
+              <IoCloseOutline
+                className="sidebar-toggle-icon"
+                onClick={() => setNavToggle(false)}
+              />
             ) : (
-              <IoMenu className='sidebar-toggle-icon' onClick={() => setNavToggle(true)} />
+              <IoMenu
+                className="sidebar-toggle-icon"
+                onClick={() => setNavToggle(true)}
+              />
             )}
-
             <Link to="/homedash">
-
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 width="14"
@@ -53,36 +60,33 @@ const Header = () => {
               </svg>
               <span>Campus Hostel</span>
             </Link>
-              <div className="navItems">
-                {items.map(({title,url,i})=>(
-                  <div key={i}>
-                    <Link to={url}>{title}</Link>
-                  </div>
-                ))}
-              </div>
-              <div className="btn__wrapper --flex-center" >
-                <button className="btn-danger" onClick={logoutUser}>
-                  Logout
-                </button>
-                <button className='notification'>
-                  <IoNotificationsOutline height={17} width={16}/>
-                </button>
-                <div>
-                  <Link to="/adminPrev">
-                    <img src="/src/assets/asset-1.png" alt="" />
-                  </Link>
-                </div>
-              </div>
-
-
-
-
           </div>
+          <div className="navItems">
+            {items.map(({ title, url, i }) => (
+              <div>
+                <Link to={url}>{title}</Link>
+              </div>
+            ))}
+          </div>
+          <div className="btn__wrapper --flex-center">
+            <button className="btn-danger" onClick={logoutUser}>
+              Logout
+            </button>
 
+            <button className="notification">
+              <IoNotificationsOutline height={17} width={16} />
+            </button>
+
+            <div>
+              <Link to="/adminsPrev">
+                <img src="/src/assets/asset-1.png" />
+              </Link>
+            </div>
+          </div>
         </nav>
       </header>
     </>
-  )
-}
+  );
+};
 
-export default Header
+export default Header;
