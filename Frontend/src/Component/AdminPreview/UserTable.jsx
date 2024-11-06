@@ -4,7 +4,7 @@ import EditRoleModal from './EditRoleModal';
 
 
 
-const UserTable = ({ data, onDelete }) => {
+const UserTable = ({ data, onDelete, onUpdateRole }) => {
 
   const [modalOpen, setModalOpen] = useState(false);
   const [selectedUser, setSelectedUser] = useState(null);
@@ -57,9 +57,7 @@ const UserTable = ({ data, onDelete }) => {
         </tbody>
       </table>
 
-      {modalOpen && (<EditRoleModal user={selectedUser}
-      onUpdateRole={onUpdateRole}
-      onClose={onClose}/>)}
+      {modalOpen && (<EditRoleModal user={selectedUser} onUpdateRole={onUpdateRole} onClose={closeModal}/>)}
     </div>
   )
 }

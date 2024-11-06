@@ -60,6 +60,7 @@ const AdminPreview = () => {
     setFilteredData(filtered)
   }
 
+
   const handleDelete = (userId) => {
     const updatedUsers = users.filter((user) => user.id !== userId)
     setUsers(updatedUsers)
@@ -68,6 +69,19 @@ const AdminPreview = () => {
 
     setFilteredData(updatedFilteredData)
   }
+
+  const handleUpdateRole = (userId, newRole) => {
+    const updatedRole = users.map((user) => user.id === userId ? { ...user, role: newRole } : user)
+
+    setUsers(updatedRole)
+
+    const updatedFilteredRole = filteredData.map((user) =>
+      user.id === userId ? { ...user, role: newRole } : user
+    )
+
+    setFilteredData(updatedFilteredRole)
+  }
+
   return (
     <>
       <div className='__prevCon'>
@@ -78,7 +92,7 @@ const AdminPreview = () => {
             onChange={handleSearchChange} />
         </div>
         <div className='__prevList'>
-          <UserTable data={filteredData} onDelete={handleDelete} />
+          <UserTable data={filteredData} onDelete={handleDelete} onUpdateRole={handleUpdateRole} />
         </div>
         <div className='__inviteBtnCon'>
           <button className='__inviteBtn'>Invite Admin</button>
