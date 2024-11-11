@@ -24,10 +24,9 @@
   background: #f0f2f5;
 }
 
-.dash-main{
+.dash-main {
   width: 90%;
   padding: 16px;
-
 }
 
 .right {
@@ -56,18 +55,19 @@
 
 .search {
   width: 100%;
-  max-width: 300px;
+  max-width: 500px;
   border-radius: 12px;
   background: #f0f2f5;
   padding: 16px;
   font-size: 16px;
   margin: 12px 0;
+  vertical-align: center;
 }
 
 .search::placeholder {
   color: #637587;
   font-family: Inter;
-  font-size: 12px;
+  font-size: 14px;
   font-style: normal;
   font-weight: 400;
   line-height: 24px;
@@ -80,7 +80,10 @@
   border-radius: 12px;
   border: 1px solid #dbe0e5;
   background: #fff;
-  
+}
+
+.table::-webkit-scrollbar {
+  display: none;
 }
 
 .table_wrapper {
@@ -95,9 +98,10 @@
 }
 
 .same_class {
-  vertical-align: top;
+  vertical-align: center;
   text-align: left;
   padding: 8px;
+  height: 75px;
 }
 
 .table__row {
@@ -116,6 +120,7 @@
 .table__row:nth-child(even) {
   background-color: #fff;
 }
+
 tbody > tr:hover {
   cursor: pointer;
 }
@@ -126,7 +131,7 @@ tbody > tr:hover {
 
 .right button {
   margin-top: 1.2em;
-  width: 480px;
+  width: 60%;
   height: 40px;
   padding: 0px 16px;
   color: #121417;
@@ -136,7 +141,6 @@ tbody > tr:hover {
   line-height: 21px;
   letter-spacing: 0.21px;
 }
-
 
 ._noBg {
   background: transparent;
@@ -149,26 +153,58 @@ tbody > tr:hover {
 }
 
 .mobile-side-nav {
-display: block;
-position: fixed;
-left: 0;
-background-color: #fff;
+  display: block;
+  position: fixed;
+  left: 0;
+  background-color: #fff;
+}
+
+.modal-content button {
+  margin: 10px;
+  width: 100%;
+  border-radius: 12px;
+  background: #1a6917;
+  padding: 10px;
+  font-size: 15px;
+  color: white;
+}
+
+.modal-content .one {
+  background: rgba(0, 0, 255, 0.743);
+  color: white;
+}
+.modal-content .two {
+  background: rgba(26, 130, 151, 0.743);
+  color: white;
+}
+.modal-content .three {
+  background: rgba(255, 0, 0, 0.743);
+  color: white;
+}
+
+.modal-content input {
+  border: 1px solid grey;
+  width: 100%;
+  padding: 4px;
+  font-size: 12px;
+  border-radius: 5px;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  -ms-border-radius: 5px;
+  -o-border-radius: 5px;
 }
 
 @media (max-width: 900px) {
   .sidebar-toggle-icon {
     display: block;
   }
-  .desktop-side-nav{
+  .desktop-side-nav {
     display: none;
   }
 
-  .dash-main{
+  .dash-main {
     width: 100%;
   }
-
-
 }
-@media (min-width:481px) and (max-width: 768px){
-  
+@media (min-width: 481px) and (max-width: 768px) {
 }

@@ -1,9 +1,10 @@
+
 import React, {useState} from 'react'
 import {Link, useNavigate} from 'react-router-dom'
 import Passwordinput from '../PasswordInput/PasswordInput'
 
 const Login = () => {
-  const [forData, setFormFata] = useState({
+  const [formData, setFormFata] = useState({
     email: "",
     password: ""
   })

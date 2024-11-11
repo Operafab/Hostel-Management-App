@@ -1,3 +1,4 @@
+
 import React from 'react'
 import "./Register.css"
 
@@ -49,7 +50,7 @@ const AdminReg = () => {
             </li>
             <li className='indicator'>
               <span >
-                &nbsp; At least 6 Charcaters
+                &nbsp; At least 6 Characters
               </span>
             </li>
           </ul>

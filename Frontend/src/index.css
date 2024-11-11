@@ -1,5 +1,4 @@
 @import url("https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap");
-
 :root {
   --main-bg: #fff;
   --primary-color: #121417;
@@ -93,6 +92,7 @@ img {
   /* width: 84px; */
   height: 40px;
 }
+
 .notification {
   border-radius: 12px;
   background: var(--secondary-btn-bg);
@@ -101,8 +101,8 @@ img {
   padding: 10px;
 }
 
- /* Flex  */
- .--flex-center {
+/* Flex  */
+.--flex-center {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -125,7 +125,7 @@ img {
   justify-content: space-between;
 }
 
- .--flex {
+.--flex {
   display: flex;
 }
 
@@ -136,18 +136,17 @@ img {
 .--dir-column {
   flex-direction: column;
 }
- 
+
 .--flex-between {
   display: flex;
   justify-content: space-between;
   align-items: center;
-} 
+}
 
 .--flex-dir-column {
   display: flex;
   flex-direction: column;
 }
-
 
 .--align-center {
   display: flex;
@@ -176,8 +175,6 @@ img {
   overflow-y: auto;
 }
 
-
-
 .--100vh {
   height: 100vh;
 }
@@ -190,16 +187,11 @@ img {
 .--flex-justify-center {
   display: flex;
   justify-content: center;
-  
 }
-
-
 
 /* .relative {
   position: relative;
 } */
-
-
 
 @media (min-width: 768px) and (max-width: 991px) {
   .container {
@@ -209,12 +201,12 @@ img {
 
 @media (min-width: 481px) and (max-width: 767px) {
   .container {
-   padding: 50px 70px;
+    padding: 50px 70px;
   }
 }
 @media (min-width: 290px) and (max-width: 480px) {
   .container {
-   padding: 0;
+    padding: 0;
   }
 }
 
