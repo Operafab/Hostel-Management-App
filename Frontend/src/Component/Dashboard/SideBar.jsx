@@ -1,27 +1,25 @@
-import React, { useState } from 'react';
-import './Dashboard.css';
-import { NavLink } from 'react-router-dom';
+import React, { useState } from 'react'
+import "./Dashboard.css"
+import { NavLink, useLocation } from 'react-router-dom';
 
 const dashboardLinks = [
-    {title: 'Dashboard', route: '/home-dash'},
-    {title: 'Student', route: '/student-dash'},
-    {title: 'Room', route: '#'},
-    {title: 'Report', route: '#'}
+    {title: "Dashboard", route: "/home-dash"},
+    {title: "Student", route: "/student-dash"},
+    {title: "Rooms", route: "/room"},
+    {title: "Report", route: "#"},
 ]
-
 const SideBar = () => {
-    const [activeIndex, setActiveIndex] = useState(1);
-
-    const handleLinkClick = (index) => {
-        setActiveIndex(index)
-    }
-
+    const location = useLocation();
   return (
     <aside className='--flex-start'>
         <div className="left">
-            {dashboardLinks.map(({title, route}, index) => (
+            {dashboardLinks.map((dashboardLink, index) => (
                 <div key={index} className="--flex-center --dir-column">
-                    <NavLink to={route} className={index === activeIndex ? 'active-link' : ''} onClick={() => handleLinkClick(index)}>{title}</NavLink>
+                    <NavLink to={dashboardLink.route}
+                    className={dashboardLink.route === location.pathname ? "active-link" : ""}
+                    >
+                        {dashboardLink.title}
+                    </NavLink>
                 </div>
             ))}
         </div>

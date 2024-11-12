@@ -7,12 +7,14 @@ const ChangeStudentRoom = ({student, onClose}) => {
     setNewRoomNumber(e.target.value)
   };
 
-  const handleSubmit = () => {};
+  const handleSubmit = () => {
+    e.preventDefault()
+  };
 
   return (
     <div className='modal'>
       <div className="modal-content">
-        <h2>Chnage Student&apos;s Room</h2>
+        <h2>Change Student&apos;s Room</h2>
 
         <form onSubmit={handleSubmit}>
           <div>
@@ -21,7 +23,7 @@ const ChangeStudentRoom = ({student, onClose}) => {
           </div>
 
 
-          <button type='submit'> Chnage Room</button>
+          <button type='submit'> Change Room</button>
           <button type='button' onClick={onClose}> Close</button>
         </form>
 

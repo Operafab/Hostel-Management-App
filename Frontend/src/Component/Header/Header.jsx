@@ -10,7 +10,7 @@ import HeaderSideNav from "./HeaderSideNav";
 
 const items = [
   { title: "Rooms", url: "/room" },
-  { title: "Student", url: "/studentdash" },
+  { title: "Student", url: "/student-dash" },
 ];
 
 const Header = () => {
@@ -63,7 +63,7 @@ const Header = () => {
           </div>
           <div className="navItems">
             {items.map(({ title, url, i }) => (
-              <div>
+              <div key={i}>
                 <Link to={url}>{title}</Link>
               </div>
             ))}

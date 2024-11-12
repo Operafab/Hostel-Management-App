@@ -7,9 +7,10 @@ import { FaPenFancy } from 'react-icons/fa';
 import { Link } from "react-router-dom";
 
 import { confirmAlert } from 'react-confirm-alert';
-import "react-confirm-alert/src/react-confirm-alert.css";
+
 import UpdateStudentProfile from "../Modal/UpdateStudentProfile";
 import ChangeStudentRoom from "../Modal/ChangeStudentRoom";
+import UpdateCheckin from "../Modal/UpdateCheckin";
  
 const studentData = [
   {
@@ -164,9 +165,10 @@ const StudentDashboard = () => {
                                 </tbody>
                             </table>
                         </div>
-                        <button className="btn-secondary">
-                            <Link to='/studentreg'>Add a student</Link>
-                        </button>
+                        <Link to='/studentreg'>
+                        <button className="btn-secondary">Add a student</button>
+                        </Link>
+                       
                     </div>
                 </main>
             </div>
