@@ -3,12 +3,19 @@
   width: 307px;
   max-width: 300px;
   height: 760px;
-  background-color: #f0f2f54e;
+  background-color: #dcddde4e;
+  /* border: 1px solid; */
+
+}
+.correction{
+  display: flex;
+  flex-direction: column;
 }
 
 .left > div {
   padding: 8px 12px;
   margin: 8px;
+  
 }
 
 .left > div > a {

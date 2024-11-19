@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import "./Dashboard.css"
+import "./DashBoard.css"
 import { NavLink, useLocation } from 'react-router-dom';
 
 const dashboardLinks = [
@@ -12,14 +12,17 @@ const SideBar = () => {
     const location = useLocation();
   return (
     <aside className='--flex-start'>
-        <div className="left">
+        <div className="left correction">
+            
             {dashboardLinks.map((dashboardLink, index) => (
                 <div key={index} className="--flex-center --dir-column">
+
                     <NavLink to={dashboardLink.route}
                     className={dashboardLink.route === location.pathname ? "active-link" : ""}
                     >
                         {dashboardLink.title}
                     </NavLink>
+
                 </div>
             ))}
         </div>

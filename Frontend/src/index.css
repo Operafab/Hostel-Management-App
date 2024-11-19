@@ -111,6 +111,8 @@ img {
   display: flex;
   justify-content: flex-start;
   align-items: flex-start;
+  /* flex-direction: column; */
+  /* border: 1px solid ; */
 }
 
 .--flex-end {

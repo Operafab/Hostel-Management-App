@@ -120,7 +120,7 @@ const Room = () => {
                   placeholder="Search by room number, status or location"
                   className="search"
                   value={search}
-                  onChan={(e) => setSearch(e.target.value)}
+                  onChange={(e) => setSearch(e.target.value)}
                 />
                 <RoomTable 
                 rooms={searchResult} 
