@@ -1,11 +1,12 @@
+
 require("dotenv").config()
 const mongoose = require("mongoose")
 const connectDb = require("./config/db")
 const errorHandler = require("./middleware/errormiddleware")
 const express = require("express");
 const cors = require("cors")
-
 const app = express();
+const adminRoutes = require("./routes/AdminRoutes") 
 
 const PORT = 5000
 
@@ -16,6 +17,8 @@ app.use((req, res, next)=>{
   res.header("Access-control-Allow-Origin");
   next()
 });
+
+app.use("/admin/", adminRoutes);
 
 
 app.use(cors({
