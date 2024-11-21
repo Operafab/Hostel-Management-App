@@ -2,6 +2,7 @@
 require("dotenv").config()
 const mongoose = require("mongoose")
 const connectDb = require("./config/db")
+const cookieParser = require("cookie-parser")
 const errorHandler = require("./middleware/errormiddleware")
 const express = require("express");
 const cors = require("cors")
@@ -12,6 +13,7 @@ const PORT = 5000
 
 app.use(express.json());
 app.use(express.urlencoded({extended:true}));
+app.use(cookieParser());
 
 app.use((req, res, next)=>{
   res.header("Access-control-Allow-Origin");
@@ -26,7 +28,7 @@ app.use(cors({
   credentials:true,
   optionsSuccessStatus:200,
   methods: "GET, POST, PUT, PATCH, DELETE, HEAD,OPTIONS"
-}))
+}));
 
 
 app.get("/", (req, res)=>console.log("Hello Teddy!"))
