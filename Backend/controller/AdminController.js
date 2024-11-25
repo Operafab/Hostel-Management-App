@@ -1,9 +1,10 @@
 
 const AdminModel = require("./../models/AdminModel");
 const generateToken = require("./../utils/index");
-
 const asyncHandler = require("express-async-handler");
 const bcrypt = require("bcryptjs")
+
+
 
 const register = asyncHandler(async (req, res)=>{
   try{
@@ -12,7 +13,6 @@ const register = asyncHandler(async (req, res)=>{
     const {fullname, email, password} = req.body;
 
     // check if all fields are provided
-  
    if (!fullname || !email || !password){ 
       res.status(400);
       throw new Error("All fields are required")
@@ -90,7 +90,6 @@ const token  = generateToken(admin._id);
 
   )
     
-
   }catch(err){
     console.error(err);
     res.status(500).send("Internal Server Error: " + err)
@@ -116,10 +115,8 @@ const getAdmin = asyncHandler( async (req, res)=>{
 })
 
 // get details of all admins
-
 const getAdmins = asyncHandler(async(req,res)=>{
   try{
-
     const admins = await AdminModel.find()
     .sort("-createAt")
     .select("-password");
@@ -132,7 +129,6 @@ const getAdmins = asyncHandler(async(req,res)=>{
     console.log(error)
   }
 });
-
 
 const updateAdmin = asyncHandler(async(req,res)=>{
 
@@ -172,7 +168,6 @@ const deleteAdmin = asyncHandler(async (req, res) => {
 });
 
 // function to log out admin
-
 const adminLogout = asyncHandler(async(req, res)=>{
   res.cookie("token", " ", {
     path: "/",
