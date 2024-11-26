@@ -1,3 +1,4 @@
+
 const mongoose = require('mongoose');
 
 const RoomSchema = new mongoose.Schema({
@@ -10,10 +11,21 @@ const RoomSchema = new mongoose.Schema({
     type: Number,
     required:true,
   },
-  roomCapacity:[
+  roomOccupancy:[
     {
       type:String,
       ref: "Student",
     }
-  ]
-})
+  ],
+  roomLocation:{
+    type:String
+  },
+  roomStatus:{
+    type:String,
+    default: "available"
+  }
+},{timestamps:true})
+
+const Room = mongoose.model('Room', RoomSchema);
+
+module.exports = Room;

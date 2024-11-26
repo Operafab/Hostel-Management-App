@@ -1,3 +1,4 @@
+ 
  const mongoose = require("mongoose");
 
  const guardianSchema = new mongoose.Schema({
@@ -36,6 +37,7 @@
     trim:true,
     unique:true,
   },
+
   guardian:guardianSchema,
   room:{
     type:mongoose.Schema.Types.ObjectId,
@@ -53,7 +55,7 @@
   },
   checkedInTime:{
     type:Date,
-    d,efault:null,
+    default:null,
   },
   checkedOutTime:{
     type:Date,
@@ -61,5 +63,5 @@
   }
  },{timestamps:true});
 
- const Student = mongoose.model("Student", StudentSchema);
+ const Student = mongoose.model("Student", studentSchema);
 module.exports = Student; 
