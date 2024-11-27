@@ -249,14 +249,27 @@ const deleteStudent = asynchandler(async (req, res) => {
         .status(404)
         .json({ message: "Invalid credentials or student not found" });
     }
+      const studentRoom = await Room.findById(student.room);
+    if(studentRoom && student){
+      studentRoom.roomOccupancy = studentRoom.roomOccupancy.filter((occupant) => 
+        occupant.toString() != studentId
+      );
+      await studentRoom.save();
+      await student.save();
 
-    const deletedStd =  Student.filter((stdId)=>{ stdId !== student})
-    res.status(200).json({ message: "Student deleted successfully" });
+     return  res.status(200).json({ message: "Student deleted successfully" });
+    } 
+    else{
+      return res.status(400).json({ message: "Bad Request" });
+    }
+   
+
   } catch (error) {
     console.error(error);
     res.status(500).json({ message: "Internal Server Error" });
   }
 });
+
 
 module.exports = {
   registerStudent,
