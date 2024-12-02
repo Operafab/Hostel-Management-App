@@ -4,7 +4,8 @@ import './Register.css'
 const StudentReg = () => {
   return (
     <div className='container form__ --100vh'>
-      <p  className='title'>Register a new Student</p>
+    <div className="form-container">
+    <p  className='title'>Register a new Student</p>
       <form className='form'>
 
         <div className='--dir-column'>
@@ -67,9 +68,7 @@ const StudentReg = () => {
           Register
         </button>
       </form>
-
-    
-
+    </div>
     </div>
   )
 }

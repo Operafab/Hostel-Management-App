@@ -1,11 +1,10 @@
 @media (min-width: 1200px) and (max-width: 1919px) {
-
   .form-container {
     width: 70%;
     max-width: 55rem;
     padding: 20px 40px;
     font-size: 25px;
-    
+    /* height: 100%; */
   }
 
   .title {
@@ -30,11 +29,10 @@
     font-size: 25px;
   }
 
-  .form-container >p >a {
+  .form-container > p > a {
     text-decoration: underline;
     font-size: 25px;
   }
-  
 }
 
 /* Normal css */
@@ -42,9 +40,10 @@
 .form__ {
   position: relative;
   display: flex;
-  flex-direction: column;
+  /* flex-direction: column; */
   align-items: center;
   justify-content: center;
+  /* padding: 2rem auto; */
 }
 
 .form-container {
@@ -55,6 +54,8 @@
   box-sizing: border-box;
   padding: 20px 30px;
   margin: 0 auto;
+  height: 100%;
+  /* text-align: center; */
 }
 
 .form-container > p > a {
@@ -112,6 +113,7 @@ label {
   background: #1a80e5;
   font-size: 14px;
   color: #fff;
+  /* margin-top: 25px; */
 }
 
 .card {
@@ -125,6 +127,13 @@ label {
   list-style: none;
   font-size: 15px;
 }
+
+.account {
+  text-align: center;
+  padding-bottom: 2rem;
+  font-size: 16px;
+}
+
 /* Normal css */
 
 .error-message {
@@ -132,9 +141,7 @@ label {
   font-size: 10px;
 }
 
-@media (min-width:992px) and (max-width: 1199px) {
-
-
+@media (min-width: 992px) and (max-width: 1199px) {
   .form-container {
     width: 70%;
     max-width: 35rem;
@@ -165,15 +172,13 @@ label {
     font-size: 20px;
   }
 
-  .form-container >p  >a {
+  .form-container > p > a {
     text-decoration: underline;
     font-size: 20px;
   }
-
 }
 
 @media (min-width: 768px) and (max-width: 991px) {
-
   .form-container {
     width: 70%;
     max-width: 30rem;
@@ -205,18 +210,17 @@ label {
     font-size: 18px;
   }
 
-  .form-container >p  >a {
+  .form-container > p > a {
     text-decoration: underline;
     font-size: 18px;
   }
 }
 
 @media (min-width: 481px) and (max-width: 767px) {
-
   .form-container {
     width: 100%;
     max-width: 30rem;
-    padding: 20px 10px; 
+    padding: 20px 10px;
     font-size: 16px;
   }
 
@@ -241,18 +245,17 @@ label {
     font-size: 12px;
   }
 
-  .form-container >p  >a {
+  .form-container > p > a {
     text-decoration: underline;
     font-size: 14px;
   }
 }
 
 @media (min-width: 290px) and (max-width: 480px) {
-  
   .form-container {
     width: 100%;
     /* max-width: 30rem; */
-    padding: 20px 10px; 
+    padding: 20px 10px;
     font-size: 16px;
   }
 
@@ -279,10 +282,4 @@ label {
     padding: 10px;
     margin-top: 10px;
   }
-}
-
-.left {
-  display: flex;
-  align-items: flex-start;
-  /* border: 1px solid red; */
 }
