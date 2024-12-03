@@ -22,10 +22,6 @@ app.use((req, res, next)=>{
   next()
 });
 
-app.use("/admin", adminRoutes);
-app.use("/room", roomRoutes);
-app.use("/student", studentRoutes);
-
 
 app.use(cors({
   origin:["http://localhost:5173"],
@@ -33,6 +29,12 @@ app.use(cors({
   optionsSuccessStatus:200,
   methods: "GET, POST, PUT, PATCH, DELETE, HEAD,OPTIONS"
 }));
+
+app.use("/admin", adminRoutes);
+app.use("/room", roomRoutes);
+app.use("/student", studentRoutes);
+
+
 
 
 app.get("/", (req, res)=>console.log("Hello Teddy!"))
