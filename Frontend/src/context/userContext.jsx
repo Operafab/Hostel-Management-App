@@ -1,11 +1,13 @@
-import React, { children, createContext, useEffect, useState } from 'react'
+import React, { createContext, useEffect, useState } from 'react'
+
+
 export const UserContext = createContext();
 const savedUser = localStorage.getItem("user");
 
 const defaultUser = savedUser ? JSON.parse(savedUser) : null;
 
-const userProvider = ({children}) => {
-  const [user, setUser] = useState(JSON.parse(savedUser) || null);
+const UserProvider = ({children}) => {
+  const [user, setUser] = useState(defaultUser);
 
   useEffect(()=>{
     if(user){
@@ -19,4 +21,4 @@ const userProvider = ({children}) => {
   
 }
 
-export default userProvider
+export default UserProvider
