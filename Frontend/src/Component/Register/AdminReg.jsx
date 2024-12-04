@@ -88,7 +88,7 @@ const AdminReg = () => {
         toast.success("Registration successful");
         navigate("/home-dash", { state: { user: response.data } });
       }
-    } catch (err) {
+    } catch (error) {
       setIsSubmitting(false);
       toast.error(error?.response?.data.msg)
       const message =
