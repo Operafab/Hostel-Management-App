@@ -31,6 +31,18 @@ const registerStudent = asynchandler(async (req, res) => {
   try {
     const { email, name, age, nationality, g_name, g_email, gender, roomNum } =
       req.body;
+    console.log(
+      email,
+      name,
+      age,
+      nationality,
+      g_name,
+      g_email,
+      gender,
+      roomNum
+    );
+
+    console.log(req.body);
     if (
       !email ||
       !name ||
@@ -42,8 +54,8 @@ const registerStudent = asynchandler(async (req, res) => {
       !roomNum
     ) {
       return res
-        .status(404)
-        .json({ message: "Please fill in all reqwuired fields" });
+        .status(400)
+        .json({ message: "Please fill in all required fields" });
     }
 
     const studentExist = await Student.findOne({ email });
@@ -242,34 +254,29 @@ const deleteStudent = asynchandler(async (req, res) => {
 
     // const student = await Student.findByIdAndDelete(studentId);
     const student = await Student.findById(studentId);
-   
 
     if (!student) {
       return res
         .status(404)
         .json({ message: "Invalid credentials or student not found" });
     }
-      const studentRoom = await Room.findById(student.room);
-    if(studentRoom && student){
-      studentRoom.roomOccupancy = studentRoom.roomOccupancy.filter((occupant) => 
-        occupant.toString() != studentId
+    const studentRoom = await Room.findById(student.room);
+    if (studentRoom && student) {
+      studentRoom.roomOccupancy = studentRoom.roomOccupancy.filter(
+        (occupant) => occupant.toString() != studentId
       );
       await studentRoom.save();
       await student.save();
 
-     return  res.status(200).json({ message: "Student deleted successfully" });
-    } 
-    else{
+      return res.status(200).json({ message: "Student deleted successfully" });
+    } else {
       return res.status(400).json({ message: "Bad Request" });
     }
-   
-
   } catch (error) {
     console.error(error);
     res.status(500).json({ message: "Internal Server Error" });
   }
 });
-
 
 module.exports = {
   registerStudent,
