@@ -3,40 +3,72 @@ import "./Dashboard.css";
 import SideBar from "./SideBar";
 import { FaBars, FaTimes } from "react-icons/fa";
 import RoomTable from "./RoomTable";
-import { confirmAlert } from 'react-confirm-alert'
+import { confirmAlert } from "react-confirm-alert";
+import axios from "axios";
+import { toast } from "react-toastify";
+import { ClipLoader } from "react-spinners";
 
-const roomsData = [
-  {
-    _id: 1,
-    roomNumber: 10,
-    roomCapacity: 5,
-    roomOccupancy: ["Ade", "Mubarak", "Chapo", "Rodiyat"],
-    roomLocation: "No 5, Ado Odo",
-    roomStatus: "Available",
-  },
-  {
-    _id: 2,
-    roomNumber: 20,
-    roomCapacity: 4,
-    roomOccupancy: ["Shola", "Adigun", "Tunubu", "Sakariyau"],
-    roomLocation: "No 2, Ikeshi",
-    roomStatus: "Unavailable",
-  },
-  {
-    _id: 3,
-    roomNumber: 30,
-    roomCapacity: 6,
-    roomOccupancy: ["Shade", "John"],
-    roomLocation: "No 3, Obasanjo",
-    roomStatus: "Available",
-  },
-];
+// const roomsData = [
+//   {
+//     _id: 1,
+//     roomNumber: 10,
+//     roomCapacity: 5,
+//     roomOccupancy: ["Ade", "Mubarak", "Chapo", "Rodiyat"],
+//     roomLocation: "No 5, Ado Odo",
+//     roomStatus: "Available",
+//   },
+//   {
+//     _id: 2,
+//     roomNumber: 20,
+//     roomCapacity: 4,
+//     roomOccupancy: ["Shola", "Adigun", "Tunubu", "Sakariyau"],
+//     roomLocation: "No 2, Ikeshi",
+//     roomStatus: "Unavailable",
+//   },
+//   {
+//     _id: 3,
+//     roomNumber: 30,
+//     roomCapacity: 6,
+//     roomOccupancy: ["Shade", "John"],
+//     roomLocation: "No 3, Obasanjo",
+//     roomStatus: "Available",
+//   },
+// ];
 
+const override = {
+  display: "block",
+  margin: "100px auto",
+};
 const Room = () => {
-  const [roomData, setRoomData] = useState(roomsData);
+  const [roomData, setRoomData] = useState([]);
   const [search, setSearch] = useState("");
   const [searchResult, setSearchResult] = useState([]);
   const [isSideBarToggle, setIsSideBarToggle] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
+
+  useEffect(() => {
+    setIsLoading(true);
+    const fetchRooms = async () => {
+      try {
+        const response = await axios.get("http://localhost:5000/room/", {
+          withCredentials: true,
+        });
+        const data = response.data;
+        console.log({ data });
+        setRoomData(data);
+      } catch (error) {
+        console.log(error);
+        if (error.response && error.response.status === 400) {
+          toast.error("Cannot fetch Room");
+        } else {
+          toast.error("Internal server error");
+        }
+      } finally {
+        setIsLoading(false);
+      }
+    };
+    fetchRooms();
+  }, []);
 
   useEffect(() => {
     const filteredRooms = roomData.filter((res) => {
@@ -52,21 +84,46 @@ const Room = () => {
     setSearchResult(filteredRooms);
   }, [roomData, search]);
 
-  const handleAddRoom = (newRoomData) => {
-    setRoomData((prevData) => [...prevData, newRoomData]);
+  const handleAddRoom = async (newRoomData) => {
+    try {
+      const response = await axios.post("http://localhost:5000/room/create-room",
+      {...newRoomData, roomNum:newRoomData.roomNumber},{withCredentials: true});
+      setRoomData((prevData) => [...prevData, newRoomData]);
+    } catch (error) {
+      console.log(error);
+    }
   };
 
-  const handleUpdateRoom = () => {
-    setRoomData((prevData) => prevData.map((room) => room._id === updatedRoomData._id ? updatedRoomData : room))
-  }
+  const handleUpdateRoom = async (updatedRoomData) => {
+    try {
+      const response = await axios.patch(`http://localhost:5000/room/update-room/${updatedRoomData._id}`,
+      {roomStatus: updatedRoomData.roomStatus},  
+      {withCredentials: true});
+      setRoomData((prevData) =>
+        prevData.map((room) =>
+          room._id === updatedRoomData._id ? updatedRoomData : room
+        )
+      );
+      toast.success("Room status updated successfully");
+    } catch (error) {
+      console.log(error);
+    }
+    
+  };
 
   const removeRoom = async (id) => {
+    console.log({id})
     try {
-      setRoomData((prevData) => prevData.filter((room) => room._id !== id))
+      const response = await axios.delete(`http://localhost:5000/room/${id}`,
+        {withCredentials: true});
+      setRoomData((prevData) => prevData.filter((room) => room._id !== id));
+      toast.success("Room deleted successfully");
+      
     } catch (error) {
-        console.error("Failed to delete room", error)
+      console.error("Failed to delete room", error);
+      toast.error("Failed to delete room");
     }
-  }
+  };
 
   const confirmDelete = (_id) => {
     confirmAlert({
@@ -81,10 +138,15 @@ const Room = () => {
         {
           label: "Cancel",
           onClick: () => alert("Deletion cancelled"),
-        }
-      ]
-    })
-  }
+        },
+      ],
+    });
+  };
+
+  if (isLoading)
+    return (
+      <ClipLoader color="#3a86ff" cssOverride={override} loading={isLoading} />
+    );
 
   return (
     <div>
@@ -122,11 +184,11 @@ const Room = () => {
                   value={search}
                   onChange={(e) => setSearch(e.target.value)}
                 />
-                <RoomTable 
-                rooms={searchResult} 
-                onAddRoom={handleAddRoom}
-                onUpdateRoom={handleUpdateRoom}
-                onDeleteRoom={confirmDelete}
+                <RoomTable
+                  rooms={searchResult}
+                  onAddRoom={handleAddRoom}
+                  onUpdateRoom={handleUpdateRoom}
+                  onDeleteRoom={confirmDelete}
                 />
               </div>
             </main>

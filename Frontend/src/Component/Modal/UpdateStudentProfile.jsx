@@ -1,15 +1,17 @@
+import axios from 'axios';
 import React from 'react'
 import { useState } from 'react';
+import { toast } from 'react-toastify';
 
 
 
 const UpdateStudentProfile = ({student, onClose, updateFilteredData}) => {
   const [formData, setFormData] = useState({
-    name: student.studentName,
+    name: student.name,
     age:student.age,
     nationality: student.nationality,
-    g_name: student.guardianName,
-    g_email: student.guardianEmail
+    g_name: student.guardian.guardianName,
+    g_email: student.guardian.guardianEmail
 
   });
   const handleChange = (e)=>{
@@ -20,35 +22,48 @@ const UpdateStudentProfile = ({student, onClose, updateFilteredData}) => {
     //  console.log(e.target)
   }
 
-  const handleSubmit = (e)=>{
+  const handleSubmit = async(e)=>{
     e.preventDefault();
 
-    updateFilteredData((prev)=>{
-      // const otherStudents = prev.filter(
-      //   (allStudent) => allStudent.id !== student.id
-      // );
+    // updateFilteredData((prev)=>{
+    //   // const otherStudents = prev.filter(
+    //   //   (allStudent) => allStudent.id !== student.id
+    //   // );
 
-      const currentStudentIndex = prev.findIndex(
-        (allStudent) => allStudent.id === student.id
-      );
-      const updatedStudent = {
-        id: student.id,
-        email: student.email,
-        gender : student.gender,
-        age : formData.age,
-        nationality: formData.nationality,
-        guardianName : formData.g_name,
-        guardianEmail : formData.g_email,
-        studentName : formData.name
-      };
-      const allStudents = [...prev]
-      allStudents[currentStudentIndex] = updatedStudent
-      return allStudents;
-      // const updatedStudents = [updatedStudent, ...otherStudents]
+    //   const currentStudentIndex = prev.findIndex(
+    //     (allStudent) => allStudent.id === student.id
+    //   );
+    //   const updatedStudent = {
+    //     id: student.id,
+    //     email: student.email,
+    //     gender : student.gender,
+    //     age : formData.age,
+    //     nationality: formData.nationality,
+    //     guardianName : formData.g_name,
+    //     guardianEmail : formData.g_email,
+    //     studentName : formData.name
+    //   };
+    //   const allStudents = [...prev]
+    //   allStudents[currentStudentIndex] = updatedStudent
+    //   return allStudents;
+    //   // const updatedStudents = [updatedStudent, ...otherStudents]
 
-      return updatedStudents;
-    });
-    onClose();
+    //   return updatedStudents;
+    // });
+    try {
+      const response = await axios.
+      patch(`http://localhost:5000/student/${student._id}`,formData,{withCredentials:true})
+      if(response.data){
+        // console.log(response.data);
+        updateFilteredData((prevData)=>[ response.data, ...prevData])
+        toast.success("Update successful!");
+        onClose()
+      }
+      
+    } catch (error) {
+      // console.log("Error updating profile", error);
+      toast.error("Error updating profile");
+    }
   };
 
 
@@ -72,11 +87,11 @@ const UpdateStudentProfile = ({student, onClose, updateFilteredData}) => {
           </div>
           <div>
             <label htmlFor="">Guardian&apos;s Name</label>
-            <input type="text" name='g_name' value={formData.guardianName} onChange={handleChange}/>
+            <input type="text" name='g_name' value={formData.g_name} onChange={handleChange}/>
           </div>
           <div>
             <label htmlFor="">Guardian&apos;s Email</label>
-            <input type="email" name='g_email' value={formData.guardianEmail} onChange={handleChange}/>
+            <input type="email" name='g_email' value={formData.g_email} onChange={handleChange}/>
           </div>
 
           <button type='submit'>Update</button>
