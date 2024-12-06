@@ -86,19 +86,26 @@ const Room = () => {
 
   const handleAddRoom = async (newRoomData) => {
     try {
-      const response = await axios.post("http://localhost:5000/room/create-room",
-      {...newRoomData, roomNum:newRoomData.roomNumber},{withCredentials: true});
+      await axios.post(
+        "http://localhost:5000/room/create-room",
+        { ...newRoomData, roomNum: newRoomData.roomNumber },
+        { withCredentials: true }
+      );
       setRoomData((prevData) => [...prevData, newRoomData]);
+      toast.success("Room added successfully");
     } catch (error) {
       console.log(error);
+      toast.error(error?.response?.data?.message);
     }
   };
 
   const handleUpdateRoom = async (updatedRoomData) => {
     try {
-      const response = await axios.patch(`http://localhost:5000/room/update-room/${updatedRoomData._id}`,
-      {roomStatus: updatedRoomData.roomStatus},  
-      {withCredentials: true});
+      await axios.patch(
+        `http://localhost:5000/room/update-room/${updatedRoomData._id}`,
+        { roomStatus: updatedRoomData.roomStatus },
+        { withCredentials: true }
+      );
       setRoomData((prevData) =>
         prevData.map((room) =>
           room._id === updatedRoomData._id ? updatedRoomData : room
@@ -108,17 +115,16 @@ const Room = () => {
     } catch (error) {
       console.log(error);
     }
-    
   };
 
   const removeRoom = async (id) => {
-    console.log({id})
+    console.log({ id });
     try {
-      const response = await axios.delete(`http://localhost:5000/room/${id}`,
-        {withCredentials: true});
+      const response = await axios.delete(`http://localhost:5000/room/${id}`, {
+        withCredentials: true,
+      });
       setRoomData((prevData) => prevData.filter((room) => room._id !== id));
       toast.success("Room deleted successfully");
-      
     } catch (error) {
       console.error("Failed to delete room", error);
       toast.error("Failed to delete room");

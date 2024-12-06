@@ -11,6 +11,7 @@ import ChangeStudentRoom from "../Modal/ChangeStudentRoom";
 import UpdateCheckin from "../Modal/UpdateCheckin";
 import { ClipLoader } from "react-spinners";
 import axios from "axios";
+import { toast } from "react-toastify";
 
 // const studentData = [
 //     {
@@ -71,6 +72,7 @@ const StudentDashboard = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedModal, setSelectedModal] = useState("");
   const [selectedStudent, setSelectedStudent] = useState(null);
+  const [currentRoomNumber, setCurrentRoomNumber] = useState("");
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
@@ -101,17 +103,28 @@ const StudentDashboard = () => {
     );
     
 
-  const handleDelete = (studentId) => {
-    // const updatedUsers = students.filter((student) => student.id !== studentId);
-    // setStudents(updatedUsers);
-    const updatedFilterData = filteredData.filter(
-      (student) => student._id !== studentId
-    );
-    setFilteredData(updatedFilterData);
+  const handleDelete = async(studentId) => {
+    try{
+      const response = await axios.delete(`http://localhost:5000/student/${studentId}`,{withCredentials:true});
+      
+      console.log(response);
+      toast.success(response?.data?.message);
+      
+      const updatedFilterData = filteredData.filter(
+        (student) => student._id !== studentId
+      );
+      setFilteredData(updatedFilterData);
+    }catch(err){
+      console.log(err)
+      // toast.error(res.data)
+    }
+    
   };
 
   const handleModalOpen = (students) => {
     setSelectedStudent(students);
+    setCurrentRoomNumber(students?.room?.roomNumber);
+
     setIsModalOpen(true);
   };
 
@@ -186,7 +199,7 @@ const StudentDashboard = () => {
                       <th className="same_class">Gender</th>
                       <th className="same_class">Age</th>
                       <th className="same_class">Nationality</th>
-                      <th className="same_class">Actions</th>
+                      <th className="same_class">Room Number</th>
                     </tr>
                   </thead>
 
@@ -268,7 +281,8 @@ const StudentDashboard = () => {
         />
       )}
       {selectedModal === "UpdateCheckin" && (
-        <UpdateCheckin student={selectedStudent} onClose={handleModalClose} />
+        <UpdateCheckin student={selectedStudent} onClose={handleModalClose} 
+        currentRoomNumber={currentRoomNumber} />
       )}
     </div>
   );

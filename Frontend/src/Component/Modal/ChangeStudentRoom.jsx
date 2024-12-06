@@ -1,18 +1,40 @@
-import React, { useState } from 'react'
+import axios from "axios";
+import React, { useState } from "react";
+import { toast } from "react-toastify";
 
-const ChangeStudentRoom = ({student, onClose}) => {
-  const [newRoomNum, setNewRoomNumber] = useState('')
+const ChangeStudentRoom = ({ student, onClose }) => {
+  const [newRoomNum, setNewRoomNumber] = useState("");
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  // console.log(student)
 
-  const handleChange = () =>{
-    setNewRoomNumber(e.target.value)
+  const handleChange = (e) => {
+    setNewRoomNumber(e.target.value);
   };
 
-  const handleSubmit = () => {
-    e.preventDefault()
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setIsSubmitting(true);
+    try {
+      const studentId = student?._id;
+      const response = await axios.put(
+        "http://localhost:5000/student/change-room",
+        { studentId: studentId, newRoomNum },
+        { withCredentials: true }
+      );
+      console.log(response);
+      toast.success(response?.data?.message);
+      onClose()
+    } catch (error) {
+      console.log(error?.response?.data?.message);
+      toast.error(error?.response?.data?.message);
+      // toast.error('Error changing room')
+    }finally{
+      setIsSubmitting(false);
+    }
   };
 
   return (
-    <div className='modal'>
+    <div className="modal">
       <div className="modal-content">
         <h2>Change Student&apos;s Room</h2>
 
@@ -22,14 +44,15 @@ const ChangeStudentRoom = ({student, onClose}) => {
             <input type="text" value={newRoomNum} onChange={handleChange} />
           </div>
 
-
-          <button type='submit'> Change Room</button>
-          <button type='button' onClick={onClose}> Close</button>
+          <button type="submit"> {isSubmitting? "Changing...":"Change Room"}</button>
+          <button type="button" onClick={onClose}>
+            {" "}
+            Close
+          </button>
         </form>
-
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default ChangeStudentRoom
+export default ChangeStudentRoom;
