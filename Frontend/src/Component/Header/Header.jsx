@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import "./Header.css";
 import { Link, useNavigate } from "react-router-dom";
 import {
@@ -7,6 +7,7 @@ import {
   IoNotificationsOutline,
 } from "react-icons/io5";
 import HeaderSideNav from "./HeaderSideNav";
+import { UserContext } from "../../context/userContext";
 
 const items = [
   { title: "Rooms", url: "/room" },
@@ -16,8 +17,9 @@ const items = [
 const Header = () => {
   const navigate = useNavigate();
   const [navToggle, setNavToggle] = useState(false);
-
+const {setUser}= useContext(UserContext)
   const logoutUser = () => {
+    localStorage.removeItem("user")
     navigate("/login");
   };
 
@@ -78,7 +80,7 @@ const Header = () => {
             </button>
 
             <div>
-              <Link to="/adminsPrev">
+              <Link to="/adminprev">
                 <img src="/src/assets/asset-1.png" />
               </Link>
             </div>

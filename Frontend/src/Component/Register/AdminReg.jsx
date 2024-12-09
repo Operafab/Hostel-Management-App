@@ -92,7 +92,7 @@ const AdminReg = () => {
       setIsSubmitting(false);
       toast.error(error?.response?.data.msg)
       const message =
-        err?.response?.data?.msg? 
+        error?.response?.data?.msg? 
         `${error.response.data.msg}` : "Internal Server Error";
       setFormValidMessage(message);
       setLoading(false);

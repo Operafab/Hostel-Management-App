@@ -1,15 +1,56 @@
 
-import React from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import './HomeDash.css';
 import { Link } from 'react-router-dom';
+import { UserContext } from '../../context/userContext';
+import axios from 'axios';
+import { ClipLoader } from 'react-spinners';
+import { toast } from 'react-toastify';
 
-const activities = [
-    {img: '/src/assets/asset-1.png', name: 'Jenny', action: 'Jenny just checked out', time:'3 mins ago'},
-    {img: '/src/assets/lady.png', name: 'John', action: 'John checked in', time:'3 mins ago'},
-    {img: '/src/assets/asset-1.png', name: 'Peter', action: 'Peter checked out', time:'3 mins ago'}
-]
-
+// const activities = [
+//     {img: '/src/assets/asset-1.png', name: 'Jenny', action: 'Jenny just checked out', time:'3 mins ago'},
+//     {img: '/src/assets/lady.png', name: 'John', action: 'John checked in', time:'3 mins ago'},
+//     {img: '/src/assets/asset-1.png', name: 'Peter', action: 'Peter checked out', time:'3 mins ago'}
+// ]
+const override = {
+    display: "block",
+    margin: "100px auto",
+  };
 const HomeDash = () => {
+    const {user} = useContext(UserContext);
+    const [isLoading, setIsLoading] = useState(true);
+    const [data, setData] = useState([]);
+    const [checkedInCount, setCheckedInCount] = useState(0);
+    const [checkedOutCount, setCheckedOutCount] = useState(0);
+    const [checkedInStudents, setCheckedInStudents] = useState([]);
+    const [checkedOutStudents, setCheckedOutStudents] = useState([]);
+    useEffect(()=>{
+        const fetchStudents = async() =>{
+            try {
+               const response = await axios.get("http://localhost:5000/student", {withCredentials:true});
+               const data = response.data 
+               console.log(data)
+               setData(data);
+               const checkedInStds = data.filter((student)=>student.checkedIn);
+               setCheckedInCount(checkedInStds.length)
+               setCheckedOutStudents(checkedInStds); 
+
+               const checkedOutStds = data.filter((student)=>!student.checkedIn);
+               setCheckedOutCount(checkedOutStds.length);
+               setCheckedOutStudents(checkedOutStds);
+            } catch (error) {
+                console.log(error)
+                toast.error(error?.response?.data?.message);
+            }finally{
+                setIsLoading(false);
+            }
+        };
+        fetchStudents();
+    },[]);
+
+    if (isLoading) {
+        <ClipLoader color="#3a86ff" cssOverride={override} loading={isLoading} />;
+      }
   return (
     <div className='--flex-center __homeDashCon'>
         <div className="__paraCon">

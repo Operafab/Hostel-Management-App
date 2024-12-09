@@ -8,6 +8,7 @@ import AdminPreview from './Component/AdminPreview/AdminPreview'
 import HomeDash from './Component/Dashboard/HomeDash'
 import StudentDashboard from './Component/Dashboard/StudentDashBoard'
 import Room from './Component/Dashboard/Room'
+import RequireAuth from './context/RequireAuth'
  
 
 function App() {
@@ -15,6 +16,7 @@ function App() {
     <Routes>
         <Route path='/' element={<AdminReg/>}/>
         <Route path='/login' element={<Login/>}/>
+        <Route element={<RequireAuth/>}>
         <Route path='/studentreg' element={
           <Layout>
             <StudentReg/>
@@ -28,6 +30,8 @@ function App() {
         }/>
         <Route path='/student-dash' element={<StudentDashboard/>}/>
         <Route path='/room' element={<Room/>}/>
+        </Route>
+        
     </Routes>
   )
 

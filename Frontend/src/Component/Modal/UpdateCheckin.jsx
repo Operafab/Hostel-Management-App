@@ -18,7 +18,7 @@ const UpdateCheckin = ({ student, onClose, currentRoomNumber }) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setIsSubmitting(true);
-    try {
+    try { 
       const response = await axios.post(
         "http://localhost:5000/student/check-in-status",
         {
