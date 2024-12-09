@@ -1,4 +1,3 @@
-
 header {
   border-bottom: 1px solid #e5e8eb;
   padding: 12px 40px;
@@ -59,11 +58,7 @@ header {
 }
 
 .mobile-sidebar {
-  display: block;
-  position: fixed;
-  left: 0;
- background-color: #fff;
- z-index: 1;
+  display: none;
 }
 
 .--sidebar-close {
@@ -76,10 +71,17 @@ header {
   font-size: 30px;
 }
 
-
 @media (max-width: 900px) {
   .sidebar-toggle-icon {
-     display: block; 
+    display: block;
+  }
+
+  .mobile-sidebar {
+    display: block;
+    position: fixed;
+    left: 0;
+    background-color: #fff;
+    z-index: 1;
   }
 
   .logo a > span {

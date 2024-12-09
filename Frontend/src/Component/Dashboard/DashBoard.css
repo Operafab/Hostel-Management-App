@@ -208,6 +208,22 @@ tbody > tr:hover {
   -o-border-radius: 5px;
 }
 
+.home_table {
+  font-family: arial, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+}
+
+.table_data, .table_data {
+  border: 1px solid #dddddd;
+  text-align: left;
+  padding: 8px;
+}
+
+.table_data:nth-child(even) {
+  background-color: #dddddd;
+}
+
 @media (max-width: 991px) {
   .sidebar-toggle-iconB {
     display: block;
