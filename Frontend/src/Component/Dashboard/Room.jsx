@@ -2,11 +2,12 @@ import React, { useEffect, useState } from "react";
 import SideBar from "./SideBar";
 import { FaBars, FaTimes } from "react-icons/fa";
 import RoomTable from "./RoomTable";
+import "./DashBoard.css"
 import { confirmAlert } from "react-confirm-alert";
 import axios from "axios";
 import { toast } from "react-toastify";
 import { ClipLoader } from "react-spinners";
-import "./DashBoard.css"
+
 
 // const roomsData = [
 //   {
