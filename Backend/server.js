@@ -25,7 +25,7 @@ app.use(
   cors({
     origin: [
       process.env.FRONTEND_URL,
-      "https://hostel-management-app-trdn.vercel.app",
+      "https://hostel-management-app-trdn.vercel.app"
     ],
     credentials: true,
     optionsSuccessStatus: 200,
