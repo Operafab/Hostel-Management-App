@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import "./Dashboard.css"
+import "./DashBoard.css"
 
 const EditStatusModal = ({room, onUpdateRoom, onClose}) => {
     const [newStatus, setNewStatus] = useState(room.roomStatus);
