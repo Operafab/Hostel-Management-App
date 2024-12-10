@@ -17,7 +17,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
 
 app.use((req, res, next) => {
-  res.header("Access-control-Allow-Origin");
+  res.header("Access-control-Allow-Origin", "*");
   next();
 });
 
