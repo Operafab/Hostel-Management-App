@@ -6,7 +6,7 @@ import { confirmAlert } from "react-confirm-alert";
 import axios from "axios";
 import { toast } from "react-toastify";
 import { ClipLoader } from "react-spinners";
-import "./Dashboard.css"
+import "./DashBoard.css"
 
 // const roomsData = [
 //   {
