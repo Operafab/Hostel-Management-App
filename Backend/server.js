@@ -24,7 +24,7 @@ app.use((req, res, next)=>{
 
 
 app.use(cors({
-  origin:[process.env.FRONTEND_URL],
+  origin:[process.env.FRONTEND_URL || "https://hostel-management-app-trdn.vercel.app"],
   credentials:true,
   optionsSuccessStatus:200,
   methods: "GET, POST, PUT, PATCH, DELETE, HEAD,OPTIONS"
