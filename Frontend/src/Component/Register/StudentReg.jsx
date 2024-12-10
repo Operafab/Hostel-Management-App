@@ -21,6 +21,8 @@ const initialState = {
   roomNum: "",
 };
 
+const BASE_URL = import.meta.env.VITE_BASE_URL;
+
 const StudentReg = () => {
   const [formData, setFormData] = useState(initialState);
   const [isLoading, setIsLoading] = useState(false);
@@ -62,7 +64,7 @@ const StudentReg = () => {
       setIsSubmitting(true);
      
       const response = await axios.post(
-        "http://localhost:5000/student/register-student",
+        `${BASE_URL}/student/register-student`,
         formData,
         { withCredentials: true }
       );

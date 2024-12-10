@@ -1,3 +1,4 @@
+
 const asynchandler = require("express-async-handler");
 const Room = require("../models/RoomModel");
 const { response } = require("express");
@@ -59,7 +60,7 @@ const getRooms = asynchandler(async(req, res) => {
 
 const deleteRoom = asynchandler(async(req, res) => {
   try {
-    const { _id: roomId} = req.params;
+    const {  roomId} = req.params;
     
     const roomTobeDeleted = await Room.findByIdAndDelete(roomId)
     if(!roomTobeDeleted){

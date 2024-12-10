@@ -13,6 +13,8 @@ const override = {
   margin: "100px auto",
 };
 
+const BASE_URL = import.meta.env.VITE_BASE_URL;
+
 const AdminReg = () => {
   const [formData, setFormData] = useState({
     fullname: "",
@@ -74,7 +76,7 @@ const AdminReg = () => {
       setLoading(true);
 
       const response = await axios.post(
-        "http://localhost:5000/admin/register",
+        `${BASE_URL}/admin/register`,
         formData,
         { withCredentials: true }
       );

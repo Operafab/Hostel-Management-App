@@ -4,7 +4,7 @@ import { useState } from 'react';
 import { toast } from 'react-toastify';
 
 
-
+const BASE_URL = import.meta.env.VITE_BASE_URL;
 const UpdateStudentProfile = ({student, onClose, updateFilteredData}) => {
   const [formData, setFormData] = useState({
     name: student.name,
@@ -52,7 +52,7 @@ const UpdateStudentProfile = ({student, onClose, updateFilteredData}) => {
     // });
     try {
       const response = await axios.
-      patch(`http://localhost:5000/student/${student._id}`,formData,{withCredentials:true})
+      patch(`${BASE_URL}/student/${student._id}`,formData,{withCredentials:true})
       if(response.data){
         // console.log(response.data);
         updateFilteredData((prevData)=>[ response.data, ...prevData])

@@ -21,7 +21,7 @@ const protectAdmin = asyncHandler(async (req, res, next)=>{
       token = req.headers?.authorization?.split(" ")[1] || req.cookies.token;
       // console.log(token)
       const decoded = jwt.verify(token, process.env.ACCESS_TOKEN);
-
+      req.adminId = decoded.id
       const foundAdmin =  await AdminModel.findById(decoded.id).select("-password")
       if(!foundAdmin){
         return res
@@ -29,7 +29,6 @@ const protectAdmin = asyncHandler(async (req, res, next)=>{
         .json({message: "Unauthorised, admin not found"});
         
       }
-      req.adminId = decoded.id
     
 
       // if(!req.adminId){

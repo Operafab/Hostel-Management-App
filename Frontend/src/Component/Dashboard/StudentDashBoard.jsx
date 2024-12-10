@@ -64,6 +64,8 @@ const override = {
   display: "block",
   margin: "100px auto",
 };
+
+const BASE_URL = import.meta.env.VITE_BASE_URL;
 const StudentDashboard = () => {
   const [searchTerm, setSearchTerm] = useState("");
   // const [students, setStudents] = useState([]);
@@ -78,7 +80,7 @@ const StudentDashboard = () => {
   useEffect(() => {
     const fetchStudents = async () => {
       try {
-        const response = await axios.get("http://localhost:5000/student", {
+        const response = await axios.get(`${BASE_URL}/student`, {
           withCredentials: true,
         });
         const data = response.data;
@@ -105,7 +107,7 @@ const StudentDashboard = () => {
 
   const handleDelete = async(studentId) => {
     try{
-      const response = await axios.delete(`http://localhost:5000/student/${studentId}`,{withCredentials:true});
+      const response = await axios.delete(`${BASE_URL}/student/${studentId}`,{withCredentials:true});
       
       console.log(response);
       toast.success(response?.data?.message);

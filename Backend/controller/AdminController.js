@@ -110,6 +110,7 @@ const getAdmins = asyncHandler(async (req, res) => {
     res.status(200).json(admins);
   } catch (error) {
     console.log(error);
+    res.status(500).json({message: "Internal Server Error"});
   }
 });
 
@@ -127,7 +128,7 @@ const updateAdmin = asyncHandler(async (req, res) => {
     res.status(200).json(admin);
   } catch (err) {
     console.log(err);
-    res.status(500).send("Internal Server Error: " + err);
+    res.status(500).json({message: "Internal Server Error"});
   }
 });
 

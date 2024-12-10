@@ -45,6 +45,13 @@ import { ClipLoader } from "react-spinners";
 //   },
 // ];
 
+const override = {
+  display: "block",
+  margin: "100px auto",
+};
+
+const BASE_URL = import.meta.env.VITE_BASE_URL;
+
 const AdminPreview = () => {
   const [search, setSearch] = useState("");
   const [admins, setAdmins] = useState([]);
@@ -54,7 +61,7 @@ const AdminPreview = () => {
   useEffect(() => {
     const fetchAdmin = async () => {
       try {
-        const response = await axios.get("http://localhost:5000/admin",{withCredentials:true});
+        const response = await axios.get(`${BASE_URL}/admin`,{withCredentials:true});
         const data = response.data;
         setFilteredData(data);
         setAdmins(data);
@@ -85,7 +92,7 @@ const AdminPreview = () => {
   const handleDelete = async (adminId) => {
     console.log
     try {
-      await axios.delete(`http://localhost:5000/admin/${adminId}`, {
+      await axios.delete(`${BASE_URL}/admin/${adminId}`, {
         withCredentials: true,
       });
       const updatedFilteredData = filteredData.filter(
@@ -103,7 +110,7 @@ const AdminPreview = () => {
   const handleUpdateRole = async (adminId, newRole) => {
     try {
       await axios.patch(
-        `http://localhost:5000/admin/${adminId}`,
+        `${BASE_URL}/admin/${adminId}`,
         { role: newRole },
         { withCredentials: true }
       );

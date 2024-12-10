@@ -19,6 +19,6 @@ router.get("/:studentId", protectAdmin, getStudent);
 router.patch("/:studentId", protectAdmin, updateStudentProfile);
 router.put("/change-room", protectAdmin, changeStudentRoom);
 router.post("/check-in-status", protectAdmin, updateCheckInStatus);
-router.delete("/:studentId", protectAdmin, deleteStudent);
+router.delete("/delete/:studentId", protectAdmin, deleteStudent);
 
 module.exports = router;

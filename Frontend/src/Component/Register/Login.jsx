@@ -11,6 +11,8 @@ const Login = () => {
     password: "",
   });
 
+  const BASE_URL = import.meta.env.VITE_BASE_URL;
+
   // const [formValidMessage, setFormValidMessage] = useState("")
   const {setUser} = useContext(UserContext)
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -33,7 +35,7 @@ const Login = () => {
       }
       setIsSubmitting(true);
       const response = await axios.post(
-        "http://localhost:5000/admin/login",
+        `${BASE_URL}/admin/login`,
         formData,
         { withCredentials: true }
       );

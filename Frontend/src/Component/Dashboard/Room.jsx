@@ -39,6 +39,8 @@ const override = {
   display: "block",
   margin: "100px auto",
 };
+
+const BASE_URL = import.meta.env.VITE_BASE_URL;
 const Room = () => {
   const [roomData, setRoomData] = useState([]);
   const [search, setSearch] = useState("");
@@ -50,7 +52,7 @@ const Room = () => {
     setIsLoading(true);
     const fetchRooms = async () => {
       try {
-        const response = await axios.get("http://localhost:5000/room/", {
+        const response = await axios.get(`${BASE_URL}/room/`, {
           withCredentials: true,
         });
         const data = response.data;
@@ -87,7 +89,7 @@ const Room = () => {
   const handleAddRoom = async (newRoomData) => {
     try {
       await axios.post(
-        "http://localhost:5000/room/create-room",
+        `${BASE_URL}/room/create-room`,
         { ...newRoomData, roomNum: newRoomData.roomNumber },
         { withCredentials: true }
       );
@@ -102,7 +104,7 @@ const Room = () => {
   const handleUpdateRoom = async (updatedRoomData) => {
     try {
       await axios.patch(
-        `http://localhost:5000/room/update-room/${updatedRoomData._id}`,
+        `${BASE_URL}/room/update-room/${updatedRoomData._id}`,
         { roomStatus: updatedRoomData.roomStatus },
         { withCredentials: true }
       );
@@ -120,7 +122,7 @@ const Room = () => {
   const removeRoom = async (id) => {
     console.log({ id });
     try {
-      const response = await axios.delete(`http://localhost:5000/room/${id}`, {
+      const response = await axios.delete(`${BASE_URL}/room/${id}`, {
         withCredentials: true,
       });
       setRoomData((prevData) => prevData.filter((room) => room._id !== id));

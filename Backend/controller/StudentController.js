@@ -103,7 +103,7 @@ const registerStudent = asynchandler(async (req, res) => {
 
 const getAllStudents = asynchandler(async (req, res) => {
   try {
-    const students = await Student.find().sort("-createdAt");
+    const students = await Student.find().populate("room").sort("-createdAt");
     if (!students) {
       return res.status(404).json({ message: "No students found" });
     }
@@ -265,8 +265,10 @@ const deleteStudent = asynchandler(async (req, res) => {
       studentRoom.roomOccupancy = studentRoom.roomOccupancy.filter(
         (occupant) => occupant.toString() != studentId
       );
+      
       await studentRoom.save();
-      await student.save();
+      await student.deleteOne();
+      
 
       return res.status(200).json({ message: "Student deleted successfully" });
     } else {
