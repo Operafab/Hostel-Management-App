@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 
 const {createNewRoom,getRoom, getRooms, deleteRoom, updateRoom} = require("../controller/RoomController");
-const { protectAdmin } = require('../middleware/authmiddleware');
+const { protectAdmin } = require('../middleware/authMiddleware');
 
 router.post("/create-room", protectAdmin, createNewRoom);
 router.get("/", protectAdmin, getRooms);

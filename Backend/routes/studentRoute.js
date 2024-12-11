@@ -2,7 +2,7 @@ const express = require("express");
 const router = express.Router();
 
 // const {createNewRoom} = require("../controller/RoomController");
-const { protectAdmin } = require("../middleware/authmiddleware");
+const { protectAdmin } = require("../middleware/authMiddleware");
 const {
   registerStudent,
   getAllStudents,

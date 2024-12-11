@@ -8,7 +8,7 @@ const {
   updateAdmin,
   deleteAdmin, 
   adminLogout} = require("../controller/AdminController");
-const { protectAdmin } = require("../middleware/authmiddleware");
+const { protectAdmin } = require("../middleware/authMiddleware");
 const router = express.Router();
 
 router.post("/register", register);
